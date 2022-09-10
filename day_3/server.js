@@ -1,9 +1,14 @@
 const http=require("http");
 const fs=require("fs");
+const _ = require('lodash');
 const server= http.createServer((req,res)=>{
     console.log("request has been made from browser to server");
   
     res.setHeader("Content-Type","text/html");
+
+    // use the lodash 
+  var rand=  _.random(0, 5);
+console.log(rand);
    
 let path="./views";
 switch(req.url){

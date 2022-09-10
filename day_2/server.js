@@ -34,6 +34,7 @@ switch(req.url){
         break;
     default:
         path+="/404.html";
+        break;
 }
     fs.readFile(path,(err,fileData)=>{
         if(err){
