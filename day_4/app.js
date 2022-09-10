@@ -12,3 +12,15 @@ app.get('/about', (req, res)=> {
 // here we send the reletive path , then then the root dir
     res.sendFile('./views/about.html',{root:__dirname});
   })
+
+
+//   redirect
+app.get('/about-us',(req,res)=>{
+    res.redirect('/about');
+})
+
+
+// 404 page
+app.use((req,res)=>{
+    res.status(404).sendFile('./views/404.html',{root:__dirname});
+})
