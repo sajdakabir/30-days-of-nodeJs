@@ -2,8 +2,22 @@ const express=require('express');
 const app=express();
 app.use(express.json());
 app.listen(3000);
-let users={};
+let users=[
+    {
+        'id':1,
+        'name':"sajda"
+    },
+    {
+        'id':2,
+        'name':"saju"
+    },
+    {
+        'id':3,
+        'name':"kabir"
+    },
+];
 app.get('/user',(req,res)=>{
+    console.log(req.query);
     res.send(users);
 })
 
@@ -38,4 +52,18 @@ app.delete('/user',(req,res)=>{
     res.json({
         message:"user deleted successfully"
     })
+    })
+
+
+    // params
+    // app.get('/user/:id',(req,res)=>{
+        
+    //     console.log(req.params.id)
+    //     res.send("user is recived");
+    // })
+    app.get('/user/:username',(req,res)=>{
+        
+        console.log(req.params.username)
+        console.log(req.params)
+        res.send("user is recived");
     })
