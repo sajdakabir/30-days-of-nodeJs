@@ -32,4 +32,11 @@ app.patch('/user',(req,res)=>{
     })
 });
 
+// delete a data
 
+app.delete('/user',(req,res)=>{
+users={};
+res.json({
+    message:"user deleted successfully"
+})
+})
