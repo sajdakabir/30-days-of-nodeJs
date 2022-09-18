@@ -38,6 +38,23 @@ const userSchema=mongoose.Schema({
     }
 });
 
+
+// all about Mongoose hooks
+
+// it has two type of hooks 1.pre , 2.post
+
+// syntex of moongoose hooks
+
+
+userSchema.pre('save',function(){
+    console.log("before saving in db",this);
+})
+
+userSchema.post('save',function(doc){
+    console.log("after saving in db",doc);
+})
+
+
 // model
 
 const userModel=mongoose.model('userModel',userSchema);
@@ -96,7 +113,7 @@ async function getUsers (req,res){
 // }
 
 async function postUser(req,res){
-    console.log(req.body);
+    // console.log(req.body);
     const dataObj=req.body;
    const user=await userModel.create(dataObj);
     res.json({
@@ -123,3 +140,9 @@ async function deleteUser(req,res){
         response:user
     })
 }
+
+
+
+
+
+
