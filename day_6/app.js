@@ -63,6 +63,14 @@ const userSchema=mongoose.Schema({
 // })
 
 
+// write mongoose hooks to hind confirmPassword
+userSchema.pre('save',function(){
+    this.confirmPassword=undefined;
+})
+
+
+
+
 // model
 
 const userModel=mongoose.model('userModel',userSchema);
