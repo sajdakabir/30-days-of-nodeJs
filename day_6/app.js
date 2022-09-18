@@ -115,9 +115,11 @@ async function updateUser(req,res){
     })
 }
 
-function deleteUser(req,res){
-    users={};
+async function deleteUser(req,res){
+    const dateToBeDeteted=req.body;
+    const user=await userModel.findOneAndDelete(dateToBeDeteted);
     res.json({
-        message:"user deleted successfully"
+        message:"user deleted successfully",
+        response:user
     })
 }
