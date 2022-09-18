@@ -8,6 +8,7 @@ const mongoose=require('mongoose');
 const db_link='mongodb+srv://admin:P8QibnCrwszXpkuX@cluster0.usksjpz.mongodb.net/?retryWrites=true&w=majority';
 mongoose.connect(db_link)
 .then(function(db){
+    // console.log(db);
     console.log('db is connected');
 })
 .catch(function(err){
@@ -42,11 +43,11 @@ const userModel=mongoose.model('userModel',userSchema);
 
  (async function createUser(){
     let user={
-        name:'sajda kabir',
-        email:'abd@gmail.com',
-        password:'12345678',
-        confirmPassword:'12345678'
+        name:'test',
+        email:'test@gmail.com',
+        password:'1234mc678',
+        confirmPassword:'1234mc678'
     };
     let data= await userModel.create(user);
     console.log(data);
-})
+})();
