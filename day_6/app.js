@@ -73,22 +73,35 @@ userRouter
 .delete(deleteUser)
 
 
+// find all user
 
 async function getUsers (req,res){
-   const users= await userModel.find();
+   const allUsers= await userModel.find();
 
     res.json({
         message:"list of all users ",
-        result:users
+        result:allUsers
     })
 }
 
-function postUser(req,res){
+//get one user
+
+// async function getUsers (req,res){
+//    const user= await userModel.findOne({name:"sajda kabir"});
+
+//     res.json({
+//         message:"one user",
+//         result:user
+//     })
+// }
+
+async function postUser(req,res){
     console.log(req.body);
-    users=req.body;
+    const dataObj=req.body;
+   const user=await userModel.create(dataObj);
     res.json({
         message:"data received successfully",
-        user:req.body
+        user:user
     });
 }
 
