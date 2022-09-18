@@ -105,20 +105,21 @@ async function postUser(req,res){
     });
 }
 
-function updateUser(req,res){
+async function updateUser(req,res){
     console.log(req.body);
     let dateToBeUpdated=req.body;
-    for(key in dateToBeUpdated){
-        users[key]=dateToBeUpdated[key];
-    }
+    const user=await userModel.findOneAndUpdate({"email":"test@gmail.com"},dateToBeUpdated);
     res.json({
-        message:"data update successfully"
+        message:"data update successfully",
+        response:user
     })
 }
 
-function deleteUser(req,res){
-    users={};
+async function deleteUser(req,res){
+    const dateToBeDeteted=req.body;
+    const user=await userModel.findOneAndDelete(dateToBeDeteted);
     res.json({
-        message:"user deleted successfully"
+        message:"user deleted successfully",
+        response:user
     })
 }
