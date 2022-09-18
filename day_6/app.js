@@ -1,5 +1,7 @@
 const express=require('express');
 const app=express();
+var emailValidator = require("email-validator");
+ 
 app.use(express.json()); //gobal middleware
 app.listen(3001);
 
@@ -24,7 +26,10 @@ const userSchema=mongoose.Schema({
     email:{
         type:String,
         required:true,
-        unique:true
+        unique:true,
+        validate:function(){
+            return emailValidator.validate(this.email);
+        }
     },
     password:{
         type:String,
@@ -34,7 +39,10 @@ const userSchema=mongoose.Schema({
     confirmPassword:{
         type:String,
         required:true,
-        minLength:8
+        minLength:8,
+        validate:function(){
+            return this.confirmPassword==this.password;
+        }
     }
 });
 
@@ -46,13 +54,13 @@ const userSchema=mongoose.Schema({
 // syntex of moongoose hooks
 
 
-userSchema.pre('save',function(){
-    console.log("before saving in db",this);
-})
+// userSchema.pre('save',function(){
+//     console.log("before saving in db",this);
+// })
 
-userSchema.post('save',function(doc){
-    console.log("after saving in db",doc);
-})
+// userSchema.post('save',function(doc){
+//     console.log("after saving in db",doc);
+// })
 
 
 // model
