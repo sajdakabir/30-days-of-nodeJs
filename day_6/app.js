@@ -74,12 +74,20 @@ userRouter
 
 
 
+// async function getUsers (req,res){
+//    const allUsers= await userModel.find();
+
+//     res.json({
+//         message:"list of all users ",
+//         result:allUsers
+//     })
+// }
 async function getUsers (req,res){
-   const users= await userModel.find();
+   const user= await userModel.findOne({name:"sajda kabir"});
 
     res.json({
         message:"list of all users ",
-        result:users
+        result:user
     })
 }
 
