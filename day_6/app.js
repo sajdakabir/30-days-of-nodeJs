@@ -19,6 +19,13 @@ userRouter
 .patch(updateUser)
 .delete(deleteUser)
 
+userRouter
+.route('/setCookies')
+.get(setCookies);
+userRouter
+.route('/getCookies')
+.get(getCookies);
+
 
 // find all user
 
@@ -72,7 +79,12 @@ async function deleteUser(req,res){
 }
 
 
+function setCookies(){
 
+}
+function getCookies(){
+    
+}
 
 
 
