@@ -79,8 +79,9 @@ async function deleteUser(req,res){
 }
 
 
-function setCookies(){
-
+function setCookies(req,res){
+res.setHeader('Set-Cookie','isLoggedIn=true');
+res.send('cookies has been set');
 }
 function getCookies(){
     
