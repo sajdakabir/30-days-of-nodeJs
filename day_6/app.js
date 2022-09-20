@@ -88,7 +88,10 @@ res.cookie('testCookie',true);
 res.send('cookies has been set');
 }
 function getCookies(req,res){
-    
+    // const cookies=req.cookies;
+    const cookies=req.cookies.isLoggedIn;
+    console.log(cookies);
+    res.send('cookies received');
 }
 
 
