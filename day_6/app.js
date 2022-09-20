@@ -1,16 +1,17 @@
 const express=require('express');
 const app=express();
 const userModel=require('./models/userModel');
- 
+const cookieParser = require('cookie-parser')
 app.use(express.json()); //gobal middleware
 app.listen(3001);
 
-
+app.use(cookieParser())
 
 // Routes
 
 const userRouter=express.Router();
 app.use('/user',userRouter);
+
 
 userRouter
 .route('/')
@@ -80,10 +81,13 @@ async function deleteUser(req,res){
 
 
 function setCookies(req,res){
-res.setHeader('Set-Cookie','isLoggedIn=true');
+// res.setHeader('Set-Cookie','isLoggedIn=true');
+res.cookie('isLoggedIn',true,{maxAge:1000*60*60*24,secure:true,httpOnly:true});
+res.cookie('testCookie',true);
+// httpOnly -->means we can get the cookie only from backend
 res.send('cookies has been set');
 }
-function getCookies(){
+function getCookies(req,res){
     
 }
 
