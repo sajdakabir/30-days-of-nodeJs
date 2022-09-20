@@ -1,7 +1,7 @@
 
 const emailValidator = require("email-validator");
 const mongoose=require('mongoose');
-
+const bcrypt=require('bcrypt');
 const db_link='mongodb+srv://admin:P8QibnCrwszXpkuX@cluster0.usksjpz.mongodb.net/?retryWrites=true&w=majority';
 mongoose.connect(db_link)
 .then(function(db){
@@ -61,6 +61,13 @@ const userSchema=mongoose.Schema({
 // write mongoose hooks to hind confirmPassword
 userSchema.pre('save',function(){
     this.confirmPassword=undefined;
+})
+
+userSchema.pre('save',async function(){
+const salt=await bcrypt.genSalt();
+const hashedString=await bcrypt.hash(this.password,salt);
+// console.log(hashedString);
+this.password=hashedString;
 })
 
 
