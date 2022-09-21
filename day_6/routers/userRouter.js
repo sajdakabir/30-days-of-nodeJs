@@ -4,7 +4,7 @@ const userRouter=express.Router();
 const userModel=require('../models/userModel');
 userRouter
 .route('/')
-.get(getUsers)
+.get(protectRoute,getUsers)
 .patch(updateUser)
 .delete(deleteUser)
 
@@ -72,5 +72,19 @@ async function getUsers (req,res){
      console.log(cookies);
      res.send('cookies received');
  }
+
+
+
+
+function protectRoute(req,res,next){
+// console.log(req.cookies);
+if(req.cookies.isLoggedIn){
+    next();
+}else{
+    return res.json({
+        message:"operation not allowed"
+    })
+}
+}
  
  module.exports=userRouter;
