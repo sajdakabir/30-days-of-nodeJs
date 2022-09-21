@@ -2,6 +2,7 @@ const express=require('express');
 const { model } = require('mongoose');
 const userRouter=express.Router();
 const userModel=require('../models/userModel');
+const protectRoute=require('./authHelper');
 userRouter
 .route('/')
 .get(protectRoute,getUsers)
@@ -73,18 +74,4 @@ async function getUsers (req,res){
      res.send('cookies received');
  }
 
-
-
-
-function protectRoute(req,res,next){
-// console.log(req.cookies);
-if(req.cookies.isLoggedIn){
-    next();
-}else{
-    return res.json({
-        message:"operation not allowed"
-    })
-}
-}
- 
  module.exports=userRouter;
