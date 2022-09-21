@@ -10,15 +10,22 @@ app.use(cookieParser())
 // Routes
 
 const userRouter=express.Router();
+const authRouter=express.Router();
 app.use('/user',userRouter);
-
+app.use('/auth',authRouter);
 
 userRouter
 .route('/')
 .get(getUsers)
-.post(postUser)
 .patch(updateUser)
 .delete(deleteUser)
+
+authRouter
+.route('/singup')
+.post(postSingUp);
+authRouter
+.route('/login')
+.post(loginUser);
 
 userRouter
 .route('/setCookies')
@@ -50,15 +57,6 @@ async function getUsers (req,res){
 //     })
 // }
 
-async function postUser(req,res){
-    // console.log(req.body);
-    const dataObj=req.body;
-   const user=await userModel.create(dataObj);
-    res.json({
-        message:"data received successfully",
-        user:user
-    });
-}
 
 async function updateUser(req,res){
     console.log(req.body);
@@ -94,5 +92,35 @@ function getCookies(req,res){
     res.send('cookies received');
 }
 
+function middleware1(req,res,next){
+    console.log("i am middleware");
+    next();
+}
+function middleware2(req,res,next){
+    console.log("i am middleware2");
+    res.sendFile('/public/index.html',{root:__dirname});
+}
+
+function getSingUp(req,res,next){
+    console.log("i am getSingUp function")
+    // res.sendFile('/public/index.html',{root:__dirname});
+    next();
+
+}
 
 
+
+
+async function postSingUp(req,res){
+    const dataObj=req.body;
+    const user=await userModel.create(dataObj);
+     res.json({
+         message:"User singed up",
+         user:user
+     });
+  
+}
+
+function loginUser(req,res){
+    
+}
