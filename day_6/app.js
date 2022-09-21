@@ -121,6 +121,31 @@ async function postSingUp(req,res){
   
 }
 
-function loginUser(req,res){
-    
+async function loginUser(req,res){
+    try{
+    const data=req.body;
+    const user=await userModel.findOne({email:data.email});
+    if(user){
+        if(user.password==data.password){
+            return res.json({
+                message:"User has logged in",
+                userDetails:data
+            });
+
+        }else{
+            return res.json({
+                message:"wrong credentials"
+            });
+        }
+    }else{
+        return res.json({
+            message:"user not found"
+        });
+    }
+}
+    catch(err){
+        return res.status(500).json({
+            message:err.message
+        });
+    }
 }
