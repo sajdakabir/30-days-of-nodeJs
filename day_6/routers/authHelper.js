@@ -1,12 +1,12 @@
 const express=require('express');
 const { model } = require('mongoose');
 const jwt = require('jsonwebtoken');
-const JWT_KEY='cbaiuwhfuwiefnwjecncdsfkjndsmfds';
+const JWT_KEY=require('../secrets');
 function protectRoute(req,res,next){
     // console.log(req.cookies);
     if(req.cookies.login){
         const isVerified=jwt.verify(req.cookies.login,JWT_KEY)
-        console.log(req.cookies);
+        // console.log(req.cookies);
         if(isVerified){
         next();
         }else{
