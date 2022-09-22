@@ -13,11 +13,11 @@ mongoose.connect(db_link)
 const userSchema=mongoose.Schema({
     name:{
         type:String,
-        require:true
+        required:true
     },
     email:{
-        tupe:String,
-        require:true,
+        type:String,
+        required:true,
         unique:true,
         validate:function(){
             return emailValidator.validate(this.email);
@@ -25,7 +25,7 @@ const userSchema=mongoose.Schema({
     },
     password:{
         type:String,
-        require:true,
+        required:true,
         minLength:8
     },
     confirmPassword:{
