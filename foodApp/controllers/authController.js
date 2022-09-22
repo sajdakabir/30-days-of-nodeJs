@@ -69,3 +69,16 @@ module.exports.loginUser=async function loginUser(req, res) {
 
 
 
+// isAuthorised-->to check the user's role
+
+module.exports.isAuthorised= function isAuthorised(roles){
+    return function(req,res,next){
+        if(roles.include(req.role)==true){
+            next();
+        }else{
+            res.status(401).json({
+                message:"operation not allowed"
+            });
+        }
+    }
+}
