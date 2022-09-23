@@ -73,7 +73,7 @@ module.exports.login = async function login(req, res) {
 
 module.exports.isAuthorised = function isAuthorised(roles) {
     return function (req, res, next) {
-        if (roles.include(req.role) == true) {
+        if (roles.includes(req.role) == true) {
             next();
         } else {
             res.status(401).json({
@@ -87,17 +87,17 @@ module.exports.isAuthorised = function isAuthorised(roles) {
 // protectRoute
 
  module.exports.protectRoute=async function protectRoute(req, res, next) {
-    // console.log(req.cookies);
+    console.log(req.cookies);
     try {
         let token;
         if (req.cookies.login) {
             token = req.cookies.login;
-            const payload = jwt.verify(token, JWT_KEY)
-            // console.log(req.cookies);
+            let payload = jwt.verify(token, JWT_KEY)
+            
             if (payload) {
                 const user = await userModel.findById(payload.payload);
                 req.role = user.role;
-                req.id = user = id;
+                req.id = user.id;
                 next();
             } else {
                 res.json({
@@ -107,7 +107,7 @@ module.exports.isAuthorised = function isAuthorised(roles) {
 
         } else {
             return res.json({
-                message: "please login again"
+                message: "please login "
             })
         }
     }catch(err){
