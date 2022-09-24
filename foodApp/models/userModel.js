@@ -30,7 +30,7 @@ const userSchema=mongoose.Schema({
     },
     confirmPassword:{
         type:String,
-        required:true,
+        
         minLength:8,
         validate:function(){
             return this.confirmPassword==this.password;
