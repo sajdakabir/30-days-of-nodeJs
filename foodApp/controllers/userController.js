@@ -7,14 +7,14 @@ module.exports.updateUser =async function updateUser(req, res) {
         let user= await userModel.findById(id);
         let dataToBeUpdated=req.body;
         if(user){
-            const keys=[];
+            let keys=[];
             for(let key in dataToBeUpdated){
                 keys.push(key);
             }
             for(let i=0;i<keys.length;i++){
                 user[keys[i]]=dataToBeUpdated[keys[i]];
             }
-            const updateData=await user.save();
+            const updatedData=await user.save();
             res.json({
                 message:"data updated successfully",
                 data:user
@@ -23,7 +23,7 @@ module.exports.updateUser =async function updateUser(req, res) {
             res.json({
                 message:"user not found"
             })
-        }
+        }  
     }catch(err){
         res.json({
             message:err.message
@@ -37,12 +37,16 @@ module.exports.deleteUser =async function deleteUser(req, res) {
         let user=await userModel.findByIdAndDelete(id);
         if(!user){
             res.json({
-                message:"data has been deleted",
-                data:user
+                message:"user not found",
+               
             })
         }
+        res.json({
+            message:"User has been deleted",
+            data:user
+        })
 
-    }catch(err){
+    }catch(err){  
         res.json({
             message:err.message
         });

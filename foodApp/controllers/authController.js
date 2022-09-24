@@ -87,7 +87,7 @@ module.exports.isAuthorised = function isAuthorised(roles) {
 // protectRoute
 
  module.exports.protectRoute=async function protectRoute(req, res, next) {
-    console.log(req.cookies);
+    // console.log(req.cookies);
     try {
         let token;
         if (req.cookies.login) {
