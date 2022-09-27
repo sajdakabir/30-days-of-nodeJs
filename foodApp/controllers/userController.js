@@ -58,7 +58,11 @@ module.exports.getUser = async function getUser(req, res) {
         let id = req.params.id;
         let user = await userModel.findById(id);
         if (user) {
-            return res.json(user);
+            
+            return res.json({
+                message:'user recived',
+                data:user
+            });
         } else {
             return res.json({
                 message: 'user not found'
