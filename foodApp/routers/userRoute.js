@@ -23,6 +23,7 @@ userRouter
 .route('/userProfile')
 .get(getUser)
 
+
 // specific to admin
 userRouter.use(isAuthorised(['admin']));
 userRouter
